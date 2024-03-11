@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -10,24 +10,30 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import RepeatRounded from '@mui/icons-material/SettingsBackupRestoreRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
+import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/navigation';
+
+import { musicIndexState } from '@/states/musicPlayer';
 
 const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
+  fontSize: '1rem',
   opacity: 0.38,
   fontWeight: 500,
   letterSpacing: 0.2,
 });
 
-interface Props {
+interface MusicPlayerProps {
   duration: number;
-  isFirst?: boolean;
-  isLast?: boolean;
 }
 
-const MusicPlayer = ({ duration, isFirst, isLast }: Props) => {
+const MusicPlayer = ({ duration }: MusicPlayerProps) => {
+  const router = useRouter();
   const theme = useTheme();
-  const [position, setPosition] = useState(0);
-  const [repeat, setRepeat] = useState(true);
+
+  const [position, setPosition] = useState<number>(0);
+  const [repeat, setRepeat] = useState<boolean>(true);
+  const [musicIndex, setMusicIndex] = useRecoilState(musicIndexState);
+
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   const disableIconColor =
     theme.palette.mode === 'dark'
@@ -55,12 +61,50 @@ const MusicPlayer = ({ duration, isFirst, isLast }: Props) => {
     setRepeat(true);
   };
 
+  const handlePrevClick = () => {
+    if (musicIndex === 0) return;
+    setMusicIndex((prev) => prev - 1);
+  };
+
+  const handleNextClick = () => {
+    if (musicIndex === 5) return;
+    setMusicIndex((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    switch (musicIndex) {
+      case 0:
+        router.push('/');
+        break;
+      case 1:
+        router.push('/projects');
+        break;
+      case 2:
+        router.push('/dashboard');
+        break;
+      case 3:
+        router.push('/house');
+        break;
+      case 4:
+        router.push('/javascript');
+        break;
+      case 5:
+        router.push('/contact');
+        break;
+      default:
+        setMusicIndex(0);
+        router.push('/');
+    }
+  }, [musicIndex]);
+
   return (
     <Box
       sx={{
         width: '100%',
         overflow: 'hidden',
         padding: '16px',
+        maxWidth: '540px',
+        margin: '0 auto',
       }}
     >
       <Slider
@@ -117,12 +161,12 @@ const MusicPlayer = ({ duration, isFirst, isLast }: Props) => {
           mt: -1,
         }}
       >
-        {isFirst ? (
+        {musicIndex === 0 ? (
           <IconButton aria-label='previous button' disabled>
             <FastRewindRounded fontSize='large' htmlColor={disableIconColor} />
           </IconButton>
         ) : (
-          <IconButton aria-label='previous button'>
+          <IconButton aria-label='previous button' onClick={handlePrevClick}>
             <FastRewindRounded fontSize='large' htmlColor={mainIconColor} />
           </IconButton>
         )}
@@ -141,12 +185,12 @@ const MusicPlayer = ({ duration, isFirst, isLast }: Props) => {
             />
           </IconButton>
         )}
-        {isLast ? (
+        {musicIndex === 5 ? (
           <IconButton aria-label='next button' disabled>
             <FastForwardRounded fontSize='large' htmlColor={disableIconColor} />
           </IconButton>
         ) : (
-          <IconButton aria-label='next button'>
+          <IconButton aria-label='next button' onClick={handleNextClick}>
             <FastForwardRounded fontSize='large' htmlColor={mainIconColor} />
           </IconButton>
         )}

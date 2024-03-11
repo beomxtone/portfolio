@@ -19,11 +19,11 @@ const LargeLayout = styled(Layout)({
   margin: '0 auto',
 });
 
-interface Props {
+interface WidgetProps {
   children: React.ReactNode;
 }
 
-const Widget = ({ children }: Props) => {
+const Widget = ({ children }: WidgetProps) => {
   const isLarge = useMediaQuery('(min-aspect-ratio: 1/1)');
 
   return (

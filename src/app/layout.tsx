@@ -14,11 +14,11 @@ const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
 });
 
-interface Props {
+interface LayoutProps {
   children: React.ReactNode;
 }
 
-const RootLayout = ({ children }: Props) => {
+const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html lang='en' className={Pretendard.className}>
       <Provider>
