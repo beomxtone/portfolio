@@ -6,18 +6,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 const CoverImageWrapper = styled('div')({
-  width: '100%',
-  height: '70%',
+  marginTop: '10vh',
+  marginBottom: '20vh',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'rgba(0,0,0,0.08)',
 });
 
 const DesktopImageWrapper = styled('div')({
   position: 'relative',
-  marginTop: '10vh',
   width: '50vh',
   maxWidth: '500px',
   aspectRatio: '1/1',
@@ -41,9 +39,10 @@ const DesktopCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
           alt={imageSrc}
           fill
           style={{ borderRadius: 24 }}
+          priority
         />
       </DesktopImageWrapper>
-      <Box sx={{ ml: 1.5, mt: 5, width: '50vh', maxWidth: '500px' }}>
+      <Box sx={{ ml: 1.5, mt: '5vh', width: '50vh', maxWidth: '500px' }}>
         <Typography noWrap fontWeight={600} fontSize='3vh'>
           {title}
         </Typography>

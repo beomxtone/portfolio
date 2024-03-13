@@ -1,3 +1,5 @@
+/** @jsxImportSource react */
+
 import localFont from 'next/font/local';
 import CssBaseline from '@mui/material/CssBaseline';
 
@@ -21,10 +23,12 @@ interface LayoutProps {
 const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html lang='en' className={Pretendard.className}>
-      <Provider>
-        <CssBaseline />
-        <body>{children}</body>
-      </Provider>
+      <body>
+        <Provider>
+          <CssBaseline />
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 };

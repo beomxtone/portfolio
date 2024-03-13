@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from '@mui/material/styles';
 import { RecoilRoot } from 'recoil';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 
 import theme from '@/styles/theme';
 
@@ -12,7 +13,9 @@ interface ProviderProps {
 const Provider = ({ children }: ProviderProps) => {
   return (
     <RecoilRoot>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <AppRouterCacheProvider>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </AppRouterCacheProvider>
     </RecoilRoot>
   );
 };

@@ -13,10 +13,10 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 
-import { musicIndexState } from '@/states/musicPlayer';
+import { contentIndexState, pageIndexState } from '@/states/musicPlayer';
 
 const TinyText = styled(Typography)({
-  fontSize: '1rem',
+  fontSize: '0.75rem',
   opacity: 0.38,
   fontWeight: 500,
   letterSpacing: 0.2,
@@ -30,9 +30,9 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   const router = useRouter();
   const theme = useTheme();
 
-  const [position, setPosition] = useState<number>(0);
   const [repeat, setRepeat] = useState<boolean>(true);
-  const [musicIndex, setMusicIndex] = useRecoilState(musicIndexState);
+  const [contentIndex, setContentIndex] = useRecoilState(contentIndexState);
+  const [pageIndex, setPageIndex] = useRecoilState(pageIndexState);
 
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   const disableIconColor =
@@ -41,7 +41,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
       : 'rgb(0 0 0 / 16%)';
 
   const onSliderChange = (value: number) => {
-    setPosition(value);
+    setContentIndex(value);
     if (value === duration) {
       setRepeat(false);
       return;
@@ -50,34 +50,34 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   };
 
   const handlePlayClick = () => {
-    setPosition((prev) => prev + 1);
-    if (position === duration - 1) {
+    setContentIndex((prev) => prev + 1);
+    if (contentIndex === duration - 1) {
       setRepeat(false);
     }
   };
 
   const handleRepeatClick = () => {
-    setPosition(0);
+    setContentIndex(0);
     setRepeat(true);
   };
 
   const handlePrevClick = () => {
-    if (musicIndex === 0) return;
-    setMusicIndex((prev) => prev - 1);
+    if (pageIndex === 0) return;
+    setPageIndex((prev) => prev - 1);
   };
 
   const handleNextClick = () => {
-    if (musicIndex === 5) return;
-    setMusicIndex((prev) => prev + 1);
+    if (pageIndex === duration) return;
+    setPageIndex((prev) => prev + 1);
   };
 
   useEffect(() => {
-    switch (musicIndex) {
+    switch (pageIndex) {
       case 0:
         router.push('/');
         break;
       case 1:
-        router.push('/projects');
+        router.push('/nag');
         break;
       case 2:
         router.push('/dashboard');
@@ -92,15 +92,17 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
         router.push('/contact');
         break;
       default:
-        setMusicIndex(0);
+        setPageIndex(0);
         router.push('/');
     }
-  }, [musicIndex]);
+    setContentIndex(0);
+  }, [pageIndex]);
 
   return (
     <Box
       sx={{
         width: '100%',
+        height: '20vh',
         overflow: 'hidden',
         padding: '16px',
         maxWidth: '540px',
@@ -110,7 +112,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
       <Slider
         aria-label='time-indicator'
         size='small'
-        value={position}
+        value={contentIndex}
         min={0}
         step={1}
         max={duration}
@@ -150,7 +152,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           mt: -2,
         }}
       >
-        <TinyText>{position}:00</TinyText>
+        <TinyText>{contentIndex}:00</TinyText>
         <TinyText>{duration}:00</TinyText>
       </Box>
       <Box
@@ -161,7 +163,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           mt: -1,
         }}
       >
-        {musicIndex === 0 ? (
+        {pageIndex === 0 ? (
           <IconButton aria-label='previous button' disabled>
             <FastRewindRounded fontSize='large' htmlColor={disableIconColor} />
           </IconButton>
@@ -185,7 +187,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
             />
           </IconButton>
         )}
-        {musicIndex === 5 ? (
+        {pageIndex === duration ? (
           <IconButton aria-label='next button' disabled>
             <FastForwardRounded fontSize='large' htmlColor={disableIconColor} />
           </IconButton>
