@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
+import PauseRounded from '@mui/icons-material/PauseRounded';
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import RepeatRounded from '@mui/icons-material/SettingsBackupRestoreRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
@@ -24,6 +25,44 @@ const TinyText = styled(Typography)({
   letterSpacing: 0.2,
 });
 
+interface ControlButtonProps {
+  repeat: boolean;
+  paused: boolean;
+  handleRepeatClick: () => void;
+  handlePauseClick: () => void;
+  handlePlayClick: () => void;
+  mainIconColor: string;
+}
+
+const ControlButton = ({
+  repeat,
+  paused,
+  handleRepeatClick,
+  handlePauseClick,
+  handlePlayClick,
+  mainIconColor,
+}: ControlButtonProps) => {
+  let iconButtonProps = {};
+  let icon = null;
+
+  if (repeat) {
+    iconButtonProps = { 'aria-label': 'repeat', onClick: handleRepeatClick };
+    icon = (
+      <RepeatRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+    );
+  } else if (paused) {
+    iconButtonProps = { 'aria-label': 'pause', onClick: handlePauseClick };
+    icon = <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />;
+  } else {
+    iconButtonProps = { 'aria-label': 'play', onClick: handlePlayClick };
+    icon = (
+      <PlayArrowRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
+    );
+  }
+
+  return <IconButton {...iconButtonProps}>{icon}</IconButton>;
+};
+
 interface MusicPlayerProps {
   duration: number;
 }
@@ -32,9 +71,11 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   const router = useRouter();
   const theme = useTheme();
 
+  const [paused, setPaused] = useState<boolean>(false);
   const [repeat, setRepeat] = useState<boolean>(false);
   const [position, setPosition] = useRecoilState(scrollIndexState);
   const [pageIndex, setPageIndex] = useRecoilState(pageIndexState);
+  const scrollAnimationRef = useRef<ReturnType<typeof setInterval>>();
 
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   const disableIconColor =
@@ -44,18 +85,25 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
 
   const handleSliderChange = (value: number) => {
     setPosition(value);
-    if (value === duration) {
+    if (value >= duration) {
       setRepeat(true);
       return;
     }
     setRepeat(false);
+    setPaused(false);
+    clearInterval(scrollAnimationRef.current);
   };
 
   const handlePlayClick = () => {
-    setPosition((prev) => prev + 1);
-    if (position === duration - 1) {
-      setRepeat(false);
-    }
+    setPaused(true);
+    scrollAnimationRef.current = setInterval(() => {
+      setPosition((prev) => prev + 1);
+    }, 10);
+  };
+
+  const handlePauseClick = () => {
+    setPaused(false);
+    clearInterval(scrollAnimationRef.current);
   };
 
   const handleRepeatClick = () => {
@@ -99,6 +147,22 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
         router.push('/');
     }
   }, [pageIndex]);
+
+  useEffect(() => {
+    if (duration === 0) return;
+    if (Math.floor(position) === duration) {
+      setRepeat(true);
+      return;
+    }
+    if (repeat) {
+      setRepeat(false);
+    }
+    if (position >= duration) {
+      clearInterval(scrollAnimationRef.current);
+      setRepeat(true);
+      setPaused(false);
+    }
+  }, [position]);
 
   return (
     <Box
@@ -176,21 +240,14 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
             <FastRewindRounded fontSize='large' htmlColor={mainIconColor} />
           </IconButton>
         )}
-        {repeat ? (
-          <IconButton aria-label='repeat' onClick={handleRepeatClick}>
-            <RepeatRounded
-              sx={{ fontSize: '3rem' }}
-              htmlColor={mainIconColor}
-            />
-          </IconButton>
-        ) : (
-          <IconButton aria-label='play' onClick={handlePlayClick}>
-            <PlayArrowRounded
-              sx={{ fontSize: '3rem' }}
-              htmlColor={mainIconColor}
-            />
-          </IconButton>
-        )}
+        <ControlButton
+          repeat={repeat}
+          paused={paused}
+          handleRepeatClick={handleRepeatClick}
+          handlePauseClick={handlePauseClick}
+          handlePlayClick={handlePlayClick}
+          mainIconColor={mainIconColor}
+        />
         {pageIndex === MAX_PAGE_LENGTH ? (
           <IconButton aria-label='next button' disabled>
             <FastForwardRounded fontSize='large' htmlColor={disableIconColor} />
