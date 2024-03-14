@@ -13,7 +13,9 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 
-import { contentIndexState, pageIndexState } from '@/states/musicPlayer';
+import { scrollIndexState, pageIndexState } from '@/states/musicPlayer';
+import { formatDuration } from '@/utils/times';
+import { MAX_PAGE_LENGTH } from '@/constants';
 
 const TinyText = styled(Typography)({
   fontSize: '0.75rem',
@@ -30,8 +32,8 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   const router = useRouter();
   const theme = useTheme();
 
-  const [repeat, setRepeat] = useState<boolean>(true);
-  const [contentIndex, setContentIndex] = useRecoilState(contentIndexState);
+  const [repeat, setRepeat] = useState<boolean>(false);
+  const [position, setPosition] = useRecoilState(scrollIndexState);
   const [pageIndex, setPageIndex] = useRecoilState(pageIndexState);
 
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
@@ -40,25 +42,25 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
       ? 'rgb(255 255 255 / 16%)'
       : 'rgb(0 0 0 / 16%)';
 
-  const onSliderChange = (value: number) => {
-    setContentIndex(value);
+  const handleSliderChange = (value: number) => {
+    setPosition(value);
     if (value === duration) {
-      setRepeat(false);
+      setRepeat(true);
       return;
     }
-    setRepeat(true);
+    setRepeat(false);
   };
 
   const handlePlayClick = () => {
-    setContentIndex((prev) => prev + 1);
-    if (contentIndex === duration - 1) {
+    setPosition((prev) => prev + 1);
+    if (position === duration - 1) {
       setRepeat(false);
     }
   };
 
   const handleRepeatClick = () => {
-    setContentIndex(0);
-    setRepeat(true);
+    setPosition(0);
+    setRepeat(false);
   };
 
   const handlePrevClick = () => {
@@ -67,11 +69,12 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   };
 
   const handleNextClick = () => {
-    if (pageIndex === duration) return;
+    if (pageIndex === MAX_PAGE_LENGTH) return;
     setPageIndex((prev) => prev + 1);
   };
 
   useEffect(() => {
+    setPosition(0);
     switch (pageIndex) {
       case 0:
         router.push('/');
@@ -95,7 +98,6 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
         setPageIndex(0);
         router.push('/');
     }
-    setContentIndex(0);
   }, [pageIndex]);
 
   return (
@@ -110,13 +112,12 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
       }}
     >
       <Slider
-        aria-label='time-indicator'
         size='small'
-        value={contentIndex}
+        value={position}
         min={0}
         step={1}
         max={duration}
-        onChange={(_, value) => onSliderChange(value as number)}
+        onChange={(_, value) => handleSliderChange(value as number)}
         sx={{
           color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(0,0,0,0.87)',
           height: 4,
@@ -142,6 +143,9 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           '& .MuiSlider-rail': {
             opacity: 0.28,
           },
+          '& .MuiSlider-track': {
+            transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+          },
         }}
       />
       <Box
@@ -152,8 +156,8 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           mt: -2,
         }}
       >
-        <TinyText>{contentIndex}:00</TinyText>
-        <TinyText>{duration}:00</TinyText>
+        <TinyText>{formatDuration(position)}</TinyText>
+        <TinyText>{formatDuration(duration)}</TinyText>
       </Box>
       <Box
         sx={{
@@ -173,21 +177,21 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           </IconButton>
         )}
         {repeat ? (
-          <IconButton aria-label='play' onClick={handlePlayClick}>
-            <PlayArrowRounded
-              sx={{ fontSize: '3rem' }}
-              htmlColor={mainIconColor}
-            />
-          </IconButton>
-        ) : (
           <IconButton aria-label='repeat' onClick={handleRepeatClick}>
             <RepeatRounded
               sx={{ fontSize: '3rem' }}
               htmlColor={mainIconColor}
             />
           </IconButton>
+        ) : (
+          <IconButton aria-label='play' onClick={handlePlayClick}>
+            <PlayArrowRounded
+              sx={{ fontSize: '3rem' }}
+              htmlColor={mainIconColor}
+            />
+          </IconButton>
         )}
-        {pageIndex === duration ? (
+        {pageIndex === MAX_PAGE_LENGTH ? (
           <IconButton aria-label='next button' disabled>
             <FastForwardRounded fontSize='large' htmlColor={disableIconColor} />
           </IconButton>

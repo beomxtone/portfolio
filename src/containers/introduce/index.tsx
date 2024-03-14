@@ -1,9 +1,6 @@
 'use client';
 
 import { useMediaQuery } from '@mui/material';
-import { useRecoilValue } from 'recoil';
-
-import { contentIndexState } from '@/states/musicPlayer';
 
 import Widget from '@/components/Widget';
 import DesktopCoverImage from '@/components/DesktopCoverImage';
@@ -15,7 +12,6 @@ const subTitle: string = 'Frontend Developer';
 const imageSrc: string = '/images/introduce/title.png';
 
 const IntroducePage = () => {
-  const contentIndex = useRecoilValue(contentIndexState);
   const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
 
   return (
@@ -49,6 +45,16 @@ const IntroducePage = () => {
           긍정적으로 소통하며 만들어낸 결과로 세상을 바꾸는 데 기여하고
           싶습니다.
         </div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
+        <div>hey</div>
       </Description>
     </Widget>
   );

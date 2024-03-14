@@ -2,12 +2,17 @@
 
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
+
+import { scrollIndexState } from '@/states/musicPlayer';
 
 import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
 
 const Layout = styled('div')(({ theme }) => ({
   height: 'calc(100vh)',
+  padding: '32px 0',
   backgroundColor:
     theme.palette.mode === 'light'
       ? 'rgba(255,255,255,0.4)'
@@ -37,19 +42,57 @@ interface WidgetProps {
 
 const Widget = ({ children }: WidgetProps) => {
   const isLarge = useMediaQuery('(min-aspect-ratio: 1/1)');
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [scrollIndex, setScrollIndex] = useRecoilState(scrollIndexState);
+
+  let maxScroll = 0;
+
+  const handleScroll = useCallback((): void => {
+    if (!contentRef.current) return;
+
+    const { scrollTop } = contentRef.current;
+
+    if (scrollTop === 0) {
+      setScrollIndex(0);
+      return;
+    }
+
+    setScrollIndex(scrollTop);
+  }, []);
+
+  if (contentRef.current) {
+    const { scrollHeight, clientHeight } = contentRef.current;
+    maxScroll = scrollHeight - clientHeight;
+  }
+
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = scrollIndex;
+    }
+  }, [scrollIndex]);
+
+  const InnerLayout = (
+    <>
+      <Content
+        ref={(el) => {
+          contentRef.current = el;
+          setIsMounted(!!el);
+        }}
+        onScroll={handleScroll}
+      >
+        {children}
+      </Content>
+      <MusicPlayer duration={isMounted ? maxScroll : 0} />
+    </>
+  );
 
   return (
     <Background>
       {isLarge ? (
-        <LargeLayout>
-          <Content>{children}</Content>
-          <MusicPlayer duration={5} />
-        </LargeLayout>
+        <LargeLayout>{InnerLayout}</LargeLayout>
       ) : (
-        <Layout>
-          <Content>{children}</Content>
-          <MusicPlayer duration={5} />
-        </Layout>
+        <Layout>{InnerLayout}</Layout>
       )}
     </Background>
   );

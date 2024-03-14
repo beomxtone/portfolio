@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 const CoverImageWrapper = styled('div')({
-  marginTop: '10vh',
+  marginTop: 'calc(10vh - 32px)',
   marginBottom: '20vh',
   display: 'flex',
   flexDirection: 'column',
