@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -31,6 +31,10 @@ interface CoverImageProps {
 }
 
 const MobileCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
+  const theme = useTheme();
+  const subTitleColor =
+    theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
+
   return (
     <CoverImageWrapper>
       <MobileImageWrapper>
@@ -46,7 +50,7 @@ const MobileCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
         <Typography noWrap fontWeight={600} fontSize='3vh'>
           {title}
         </Typography>
-        <Typography color='text.secondary' fontWeight={500} fontSize='2vh'>
+        <Typography color={subTitleColor} fontWeight={600} fontSize='2vh'>
           {subTitle}
         </Typography>
       </Box>
