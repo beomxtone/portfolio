@@ -1,5 +1,6 @@
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 const DescriptionWrapper = styled('div')({
   width: '100%',
@@ -14,25 +15,37 @@ const DescriptionWrapper = styled('div')({
   overflow: 'hidden',
 });
 
+const SubTitle = styled(Typography)({
+  marginBottom: '2vh',
+  color: 'text.secondary',
+  fontWeight: 600,
+  fontSize: 20,
+});
+
 interface descriptionProps {
   children: React.ReactNode;
   title?: string;
 }
 
 const Description = ({ children, title }: descriptionProps) => {
+  const theme = useTheme();
+  const backColor =
+    theme.palette.mode === 'dark'
+      ? 'rgba(0, 0, 0, 0.4)'
+      : 'rgba(255, 255, 255, 0.4)';
+
   return (
     <DescriptionWrapper>
-      <>
-        <Typography
-          sx={{ mb: '2vh' }}
-          color='text.secondary'
-          fontWeight={500}
-          fontSize='2.5vh'
-        >
-          {title}
-        </Typography>
+      <Box
+        sx={{
+          backgroundColor: backColor,
+          borderRadius: 4,
+          padding: 4,
+        }}
+      >
+        <SubTitle>{title}</SubTitle>
         {children}
-      </>
+      </Box>
     </DescriptionWrapper>
   );
 };

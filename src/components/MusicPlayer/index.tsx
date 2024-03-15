@@ -113,11 +113,15 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
 
   const handlePrevClick = () => {
     if (pageIndex === 0) return;
+    if (!paused) setPaused(!paused);
+    clearInterval(scrollAnimationRef.current);
     setPageIndex((prev) => prev - 1);
   };
 
   const handleNextClick = () => {
     if (pageIndex === MAX_PAGE_LENGTH) return;
+    if (!paused) setPaused(!paused);
+    clearInterval(scrollAnimationRef.current);
     setPageIndex((prev) => prev + 1);
   };
 
@@ -168,7 +172,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
     <Box
       sx={{
         width: '100%',
-        height: '20vh',
+        height: '20svh',
         overflow: 'hidden',
         padding: '16px',
         maxWidth: '540px',

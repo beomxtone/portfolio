@@ -11,7 +11,7 @@ import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
 
 const Layout = styled('div')(({ theme }) => ({
-  height: 'calc(100vh)',
+  height: '100svh',
   padding: '32px 0',
   backgroundColor:
     theme.palette.mode === 'light'
@@ -29,7 +29,7 @@ const LargeLayout = styled(Layout)({
 });
 
 const Content = styled('div')({
-  height: '80vh',
+  height: '80svh',
   overflow: 'auto',
   '&::-webkit-scrollbar': {
     display: 'none',
