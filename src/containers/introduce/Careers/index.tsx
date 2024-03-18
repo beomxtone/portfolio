@@ -11,7 +11,7 @@ import Bold from '@/components/Bold';
 const CompanyList = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  gap: 32,
+  gap: 80,
 });
 
 const CompanyWrapper = styled('div')({
@@ -28,13 +28,24 @@ const CompanyImage = styled('div')({
 });
 
 const SsafyProjects = (
-  <Project
-    title='명절 잔소리 영수증'
-    summary='가족 세대갈등 해소 플랫폼'
-    period='2024.01 ~ 2024.02'
-    skills={['Typescript', 'Next 13', 'Vanilla Extract', 'Recoil']}
-    comments={[]}
-  />
+  <>
+    <Project
+      title='명절 잔소리 영수증'
+      summary='가족 세대갈등 해소 플랫폼'
+      period='2024.01 ~ 2024.02'
+      skills={['Typescript', 'Next 13', 'Vanilla Extract', 'Recoil']}
+      link='https://github.com/jansorry/jansorry-fe'
+      comments={[]}
+    />
+    <Project
+      title='자바스크립트 북스터디'
+      summary='모던 자바스크립트 Deep Dive'
+      period='2023.08 ~ 2024.02'
+      skills={['Javascript']}
+      link='https://github.com/deep-dive-to-js/study-js-deep-dive'
+      comments={[]}
+    />
+  </>
 );
 
 const AcrossbProjects = (

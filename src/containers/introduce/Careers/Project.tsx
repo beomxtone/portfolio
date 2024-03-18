@@ -1,9 +1,22 @@
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import BuildRoundedIcon from '@mui/icons-material/BuildRounded';
+import Link from 'next/link';
+
+import { IconGithub, IconGithubLight } from '#/svgs';
 
 const ProjectWrapper = styled('div')({
   marginTop: 32,
+});
+
+const TitleWrapper = styled('div')({
+  display: 'flex',
+  gap: 8,
+});
+
+const IconWrapper = styled(Link)({
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const SkillsWrapper = styled('div')({
@@ -14,7 +27,7 @@ const SkillsWrapper = styled('div')({
 });
 
 const Skill = styled('div')({
-  backgroundColor: 'lightgrey',
+  backgroundColor: 'rgba(128, 128, 128, 0.2)',
   padding: '2px 4px',
   borderRadius: 4,
   fontSize: 12,
@@ -25,6 +38,7 @@ interface ProjectInterface {
   period: string;
   skills: string[];
   comments: string[];
+  link?: string;
   summary?: string;
 }
 
@@ -33,11 +47,25 @@ const Project = ({
   period,
   skills,
   comments,
+  link,
   summary,
 }: ProjectInterface) => {
+  const theme = useTheme();
+
   return (
     <ProjectWrapper>
-      <Typography sx={{ fontWeight: 700 }}>▎{title}</Typography>
+      <TitleWrapper>
+        <Typography sx={{ fontWeight: 700 }}>▎{title}</Typography>
+        {link && (
+          <IconWrapper href={link}>
+            {theme.palette.mode === 'light' ? (
+              <IconGithub width={24} height={24} />
+            ) : (
+              <IconGithubLight width={24} height={24} />
+            )}
+          </IconWrapper>
+        )}
+      </TitleWrapper>
       {summary && (
         <Typography sx={{ fontSize: 12, ml: 2 }}>{summary}</Typography>
       )}

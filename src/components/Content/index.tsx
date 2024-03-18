@@ -11,7 +11,7 @@ const Content = ({ children }: ContentProps) => {
   const theme = useTheme();
   const backColor =
     theme.palette.mode === 'dark'
-      ? 'rgba(0, 0, 0, 0.2)'
+      ? 'rgba(0, 0, 0, 0.3)'
       : 'rgba(255, 255, 255, 0.2)';
 
   return (
