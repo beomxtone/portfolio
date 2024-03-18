@@ -1,14 +1,14 @@
 'use client';
 
 import { useMediaQuery } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 import Widget from '@/components/Widget';
 import DesktopCoverImage from '@/components/DesktopCoverImage';
 import MobileCoverImage from '@/components/MobileCoverImage';
 import Description from '@/components/Description';
 import Sentence from '@/components/Description/Sentence';
-import Bold from '@/components/Description/Bold';
+import Bold from '@/components/Bold';
+import Careers from './Careers';
 
 const title: string = 'Beomseok Seo';
 const subTitle: string = 'Frontend Developer';
@@ -47,6 +47,8 @@ const IntroducePage = () => {
           싶습니다.
         </Sentence>
       </Description>
+
+      <Careers />
     </Widget>
   );
 };

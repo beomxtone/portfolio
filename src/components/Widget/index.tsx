@@ -16,7 +16,7 @@ const Layout = styled('div')(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === 'light'
       ? 'rgba(255,255,255,0.4)'
-      : 'rgba(0,0,0,0.4)',
+      : 'rgba(0,0,0,0.6)',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',

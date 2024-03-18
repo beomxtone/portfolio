@@ -4,7 +4,7 @@ interface BoldProps {
   children: React.ReactNode;
 }
 
-const Bold = ({ children }: BoldProps) => {
+const Index = ({ children }: BoldProps) => {
   return (
     <Box component='span' fontWeight={800}>
       {children}
@@ -12,4 +12,4 @@ const Bold = ({ children }: BoldProps) => {
   );
 };
 
-export default Bold;
+export default Index;

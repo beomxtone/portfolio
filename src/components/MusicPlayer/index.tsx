@@ -154,14 +154,10 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
 
   useEffect(() => {
     if (duration === 0) return;
-    if (Math.floor(position) === duration) {
-      setRepeat(true);
-      return;
-    }
     if (repeat) {
       setRepeat(false);
     }
-    if (position >= duration) {
+    if (position + 1 >= duration) {
       clearInterval(scrollAnimationRef.current);
       setRepeat(true);
       setPaused(false);

@@ -41,6 +41,7 @@ const MobileCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
         <Image
           src={imageSrc}
           alt={imageSrc}
+          sizes='100vw'
           fill
           style={{ borderRadius: 24 }}
           priority
