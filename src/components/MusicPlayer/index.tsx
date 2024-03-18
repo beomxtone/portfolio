@@ -11,18 +11,28 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import RepeatRounded from '@mui/icons-material/SettingsBackupRestoreRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
-import { useRecoilState } from 'recoil';
+import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 
 import { scrollIndexState, pageIndexState } from '@/states/musicPlayer';
 import { formatDuration } from '@/utils/times';
 import { MAX_PAGE_LENGTH } from '@/constants';
+import { darkThemeState } from '@/states/theme';
 
 const TinyText = styled(Typography)({
   fontSize: '0.75rem',
   opacity: 0.38,
   fontWeight: 500,
   letterSpacing: 0.2,
+});
+
+const ThemeButton = styled('button')({
+  border: 0,
+  backgroundColor: 'transparent',
+  position: 'absolute',
+  left: '10vw',
 });
 
 interface ControlButtonProps {
@@ -75,6 +85,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
   const [repeat, setRepeat] = useState<boolean>(false);
   const [position, setPosition] = useRecoilState(scrollIndexState);
   const [pageIndex, setPageIndex] = useRecoilState(pageIndexState);
+  const setToggleDarkMode = useSetRecoilState(darkThemeState);
   const scrollAnimationRef = useRef<ReturnType<typeof setInterval>>();
 
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
@@ -82,6 +93,10 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
     theme.palette.mode === 'dark'
       ? 'rgb(255 255 255 / 16%)'
       : 'rgb(0 0 0 / 16%)';
+
+  const toggleTheme = () => {
+    setToggleDarkMode((prev) => !prev);
+  };
 
   const handleSliderChange = (value: number) => {
     setPosition(value);
@@ -231,6 +246,13 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           mt: -1,
         }}
       >
+        <ThemeButton onClick={toggleTheme}>
+          {theme.palette.mode === 'light' ? (
+            <WbSunnyRoundedIcon sx={{ color: 'rgba(0, 0, 0, 0.8)' }} />
+          ) : (
+            <DarkModeRoundedIcon sx={{ color: 'rgba(255, 255, 255, 0.8)' }} />
+          )}
+        </ThemeButton>
         {pageIndex === 0 ? (
           <IconButton aria-label='previous button' disabled>
             <FastRewindRounded fontSize='large' htmlColor={disableIconColor} />
