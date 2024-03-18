@@ -2,6 +2,9 @@
 
 import { useMediaQuery } from '@mui/material';
 
+import Skills from '@/containers/introduce/Skills';
+import Aboutme from '@/containers/introduce/Aboutme';
+
 import Widget from '@/components/Widget';
 import DesktopCoverImage from '@/components/DesktopCoverImage';
 import MobileCoverImage from '@/components/MobileCoverImage';
@@ -48,6 +51,8 @@ const IntroducePage = () => {
         </Sentence>
       </Description>
 
+      <Aboutme />
+      <Skills />
       <Careers />
     </Widget>
   );
