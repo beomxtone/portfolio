@@ -35,7 +35,13 @@ const SsafyProjects = (
       period='2024.01 ~ 2024.02'
       skills={['Typescript', 'Next 13', 'Vanilla Extract', 'Recoil']}
       link='https://github.com/jansorry/jansorry-fe'
-      comments={[]}
+      comments={[
+        'Next의 SSR에 대응하기 위해 Vanilla Extract 도입',
+        'JWT를 사용해 소셜 로그인 구현',
+        '웹 성능 최적화로 Lighthouse 100점을 달성',
+        'Intersection Observer와 useRef로 무한스크롤 구현',
+        'Dockerfile 작성, 빌드 및 배포 자동화 경험',
+      ]}
     />
     <Project
       title='자바스크립트 북스터디'
@@ -43,7 +49,6 @@ const SsafyProjects = (
       period='2023.08 ~ 2024.02'
       skills={['Javascript']}
       link='https://github.com/deep-dive-to-js/study-js-deep-dive'
-      comments={[]}
     />
   </>
 );
@@ -54,7 +59,11 @@ const AcrossbProjects = (
     summary='매출정보 데이터 시각화 대시보드'
     period='2021.12 ~ 2022.04'
     skills={['Vue.js', 'Nest.js', 'AthenaDB', 'Chart.js']}
-    comments={[]}
+    comments={[
+      '풀스택 개발 담당',
+      '10초의 긴 로딩 시간을 3초 안쪽으로 개선',
+      'Jest를 사용한 TDD 및 코드리뷰 경험',
+    ]}
   />
 );
 

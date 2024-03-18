@@ -33,11 +33,27 @@ const Skill = styled('div')({
   fontSize: 12,
 });
 
+const CommentWrapper = styled('div')({
+  'li:before': {
+    content: '"- "',
+  },
+  marginTop: 16,
+  marginLeft: 24,
+});
+
+const Comment = styled('li')({
+  margin: '4px 0',
+  fontSize: 14,
+  listStyleType: 'none',
+  textIndent: -7,
+  wordBreak: 'keep-all',
+});
+
 interface ProjectInterface {
   title: string;
   period: string;
   skills: string[];
-  comments: string[];
+  comments?: string[];
   link?: string;
   summary?: string;
 }
@@ -79,6 +95,13 @@ const Project = ({
             <Skill key={skill}>{skill}</Skill>
           ))}
         </SkillsWrapper>
+      )}
+      {comments && (
+        <CommentWrapper>
+          {comments.map((comment) => (
+            <Comment key={comment}>{comment}</Comment>
+          ))}
+        </CommentWrapper>
       )}
     </ProjectWrapper>
   );
