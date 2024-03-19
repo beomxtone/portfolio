@@ -6,13 +6,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { scrollIndexState } from '@/states/musicPlayer';
+import { isScrollState } from '@/states/coverImage';
 
 import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
 
 const Layout = styled('div')(({ theme }) => ({
   height: '100svh',
-  padding: '32px 0',
+  paddingBottom: 32,
   backgroundColor:
     theme.palette.mode === 'light'
       ? 'rgba(255,255,255,0.4)'
@@ -45,6 +46,7 @@ const Widget = ({ children }: WidgetProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [scrollIndex, setScrollIndex] = useRecoilState(scrollIndexState);
+  const [isScroll, setIsScroll] = useRecoilState(isScrollState);
 
   let maxScroll = 0;
 
@@ -67,6 +69,9 @@ const Widget = ({ children }: WidgetProps) => {
   }
 
   useEffect(() => {
+    if (scrollIndex === 0) setIsScroll(false);
+    else if (scrollIndex !== 0 && !isScroll) setIsScroll(true);
+
     if (contentRef.current) {
       contentRef.current.scrollTop = scrollIndex;
     }

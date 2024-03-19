@@ -4,9 +4,12 @@ import Image from 'next/image';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { useRecoilValue } from 'recoil';
+
+import { isScrollState } from '@/states/coverImage';
 
 const CoverImageWrapper = styled('div')({
-  marginTop: 'calc(10vh - 32px)',
+  marginTop: '10vh',
   marginBottom: '20vh',
   display: 'flex',
   flexDirection: 'column',
@@ -24,6 +27,10 @@ const DesktopImageWrapper = styled('div')({
   flexShrink: 0,
 });
 
+const Blanks = styled('div')({
+  height: 240,
+});
+
 interface CoverImageProps {
   imageSrc: string;
   title: string;
@@ -32,8 +39,11 @@ interface CoverImageProps {
 
 const DesktopCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
   const theme = useTheme();
+  const isScroll = useRecoilValue(isScrollState);
   const subTitleColor =
     theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
+
+  if (isScroll) return <Blanks />;
 
   return (
     <CoverImageWrapper>
