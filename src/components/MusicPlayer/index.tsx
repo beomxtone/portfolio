@@ -13,6 +13,7 @@ import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
+import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 
@@ -26,13 +27,6 @@ const TinyText = styled(Typography)({
   opacity: 0.38,
   fontWeight: 500,
   letterSpacing: 0.2,
-});
-
-const ThemeButton = styled('button')({
-  border: 0,
-  backgroundColor: 'transparent',
-  position: 'absolute',
-  left: '10vw',
 });
 
 interface ControlButtonProps {
@@ -246,13 +240,17 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
           mt: -1,
         }}
       >
-        <ThemeButton onClick={toggleTheme}>
+        <IconButton
+          sx={{ mr: '10vw' }}
+          aria-label='theme button'
+          onClick={toggleTheme}
+        >
           {theme.palette.mode === 'light' ? (
             <WbSunnyRoundedIcon sx={{ color: 'rgba(0, 0, 0, 0.8)' }} />
           ) : (
             <DarkModeRoundedIcon sx={{ color: 'rgba(255, 255, 255, 0.8)' }} />
           )}
-        </ThemeButton>
+        </IconButton>
         {pageIndex === 0 ? (
           <IconButton aria-label='previous button' disabled>
             <FastRewindRounded fontSize='large' htmlColor={disableIconColor} />
@@ -279,6 +277,9 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
             <FastForwardRounded fontSize='large' htmlColor={mainIconColor} />
           </IconButton>
         )}
+        <IconButton sx={{ ml: '10vw' }} aria-label='list button'>
+          <FormatListBulletedRoundedIcon />
+        </IconButton>
       </Box>
     </Box>
   );

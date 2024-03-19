@@ -92,6 +92,7 @@ const CompanyInfo = ({
             src={`/images/introduce/${imageInfo}.png`}
             alt={imageInfo}
             fill
+            sizes='48px'
           />
         </CompanyImage>
         <div>
