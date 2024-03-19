@@ -16,7 +16,14 @@ const Content = ({ children }: ContentProps) => {
 
   return (
     <ContentWrapper>
-      <Box sx={{ backgroundColor: backColor, borderRadius: 4, padding: 4 }}>
+      <Box
+        sx={{
+          backgroundColor: backColor,
+          borderRadius: 4,
+          padding: 4,
+          border: '0.5px solid rgba(0, 0, 0, 0.1)',
+        }}
+      >
         {children}
       </Box>
     </ContentWrapper>
