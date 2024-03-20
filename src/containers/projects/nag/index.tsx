@@ -13,25 +13,34 @@ import Description from '@/components/Description';
 const title: string = '명절 잔소리 영수증';
 const subTitle: string = '가족 세대갈등 해소 플랫폼';
 const imageSrc: string = '/images/nag/title.png';
+const link: string = 'https://jansorry.vercel.app';
 
 const NagPage = () => {
   const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
 
   return (
     <>
-      <Header title={title} subTitle={subTitle} imageSrc={imageSrc} />
+      <Header
+        title={title}
+        subTitle={subTitle}
+        imageSrc={imageSrc}
+        link={link}
+        github='https://github.com/jansorry/jansorry-fe'
+      />
       <Widget>
         {isDesktop ? (
           <DesktopCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         ) : (
           <MobileCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         )}
 

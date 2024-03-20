@@ -13,25 +13,33 @@ import Bold from '@/components/Bold';
 const title: string = '내집스캔';
 const subTitle: string = '부동산 등기부등본 자동 분석 프로젝트';
 const imageSrc: string = '/images/house/title.png';
+const link: string = 'https://www.naezipscan.com/';
 
 const HousePage = () => {
   const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
 
   return (
     <>
-      <Header title={title} subTitle={subTitle} imageSrc={imageSrc} />
+      <Header
+        title={title}
+        subTitle={subTitle}
+        imageSrc={imageSrc}
+        link={link}
+      />
       <Widget>
         {isDesktop ? (
           <DesktopCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         ) : (
           <MobileCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         )}
 

@@ -17,25 +17,33 @@ import Header from '@/components/Header';
 const title: string = 'Beomseok Seo';
 const subTitle: string = 'Frontend Developer';
 const imageSrc: string = '/images/introduce/title.png';
+const link: string = 'https://github.com/beomxtone';
 
 const IntroducePage = () => {
   const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
 
   return (
     <>
-      <Header title={title} subTitle={subTitle} imageSrc={imageSrc} />
+      <Header
+        title={title}
+        subTitle={subTitle}
+        imageSrc={imageSrc}
+        github={link}
+      />
       <Widget>
         {isDesktop ? (
           <DesktopCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         ) : (
           <MobileCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         )}
 

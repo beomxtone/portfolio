@@ -5,6 +5,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useRecoilValue } from 'recoil';
+import Link from 'next/link';
 
 import { isScrollState } from '@/states/coverImage';
 import { ShowOpacity } from '@/styles/keyframes';
@@ -37,27 +38,37 @@ interface CoverImageProps {
   imageSrc: string;
   title: string;
   subTitle: string;
+  link?: string;
 }
 
-const DesktopCoverImage = ({ imageSrc, title, subTitle }: CoverImageProps) => {
+const DesktopCoverImage = ({
+  imageSrc,
+  title,
+  subTitle,
+  link,
+}: CoverImageProps) => {
   const theme = useTheme();
   const isScroll = useRecoilValue(isScrollState);
   const subTitleColor =
     theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
+
+  const CoverImage = (
+    <Image
+      src={imageSrc}
+      alt={imageSrc}
+      sizes='100vw'
+      fill
+      style={{ borderRadius: 24, border: '0.5px solid rgba(0, 0, 0, 0.05)' }}
+      priority
+    />
+  );
 
   if (isScroll) return <Blanks />;
 
   return (
     <CoverImageWrapper>
       <DesktopImageWrapper>
-        <Image
-          src={imageSrc}
-          alt={imageSrc}
-          sizes='100vw'
-          fill
-          style={{ borderRadius: 24 }}
-          priority
-        />
+        {link ? <Link href={link}>{CoverImage}</Link> : CoverImage}
       </DesktopImageWrapper>
       <Box sx={{ ml: 1.5, mt: '5vh', width: '50vh', maxWidth: '500px' }}>
         <Typography noWrap fontWeight={600} fontSize='3vh'>

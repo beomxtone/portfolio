@@ -19,7 +19,12 @@ const JavascriptPage = () => {
 
   return (
     <>
-      <Header title={title} subTitle={subTitle} imageSrc={imageSrc} />
+      <Header
+        title={title}
+        subTitle={subTitle}
+        imageSrc={imageSrc}
+        github='https://github.com/deep-dive-to-js/study-js-deep-dive'
+      />
       <Widget>
         {isDesktop ? (
           <DesktopCoverImage

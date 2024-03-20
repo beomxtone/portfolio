@@ -13,25 +13,33 @@ import Header from '@/components/Header';
 const title: string = '어크로스비 대시보드';
 const subTitle: string = '매출 정보 데이터 시각화 프로젝트';
 const imageSrc: string = '/images/dashboard/title.png';
+const link: string = 'https://www.acrossb.net/';
 
 const DashboardPage = () => {
   const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
 
   return (
     <>
-      <Header title={title} subTitle={subTitle} imageSrc={imageSrc} />
+      <Header
+        title={title}
+        subTitle={subTitle}
+        imageSrc={imageSrc}
+        link={link}
+      />
       <Widget>
         {isDesktop ? (
           <DesktopCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         ) : (
           <MobileCoverImage
             title={title}
             subTitle={subTitle}
             imageSrc={imageSrc}
+            link={link}
           />
         )}
 

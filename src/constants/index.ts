@@ -1,1 +1,1 @@
-export const MAX_PAGE_LENGTH = 5 as const;
+export const MAX_PAGE_LENGTH = 4 as const;
