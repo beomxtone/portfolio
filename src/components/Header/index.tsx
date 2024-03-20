@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 
 import { isScrollState } from '@/states/coverImage';
+import { DownFromTop } from '@/styles/keyframes';
 
 const HeaderAlign = styled('div')({
   display: 'flex',
@@ -23,6 +24,7 @@ const HeaderWrapper = styled('header')({
   backdropFilter: 'blur(10px)',
   zIndex: 1000,
   borderRadius: '0 0 24px 24px',
+  animation: `${DownFromTop} 1s cubic-bezier(0.4, 0, 0.07, 1) 1`,
 });
 
 const HeaderImage = styled('div')({

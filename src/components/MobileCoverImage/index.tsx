@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useRecoilValue } from 'recoil';
 
 import { isScrollState } from '@/states/coverImage';
+import { ShowOpacity } from '@/styles/keyframes';
 
 const CoverImageWrapper = styled('div')({
   marginTop: '10vh',
@@ -15,6 +16,7 @@ const CoverImageWrapper = styled('div')({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
+  animation: `${ShowOpacity} 600ms cubic-bezier(0.4, 0, 0.07, 1) 1`,
 });
 
 const MobileImageWrapper = styled('div')({
