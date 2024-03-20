@@ -50,15 +50,18 @@ const IntroducePage = () => {
         <Description title='👋 Introduce'>
           <Sentence>안녕하세요.</Sentence>
           <Sentence>
-            첫 화면을 중요하게 생각하는 <Bold>프론트엔드 개발자 서범석</Bold>
+            <Bold>
+              &quot;불가능해요.&quot; 대신 해결 방안을 같이 고민하는 프론트엔드
+              개발자 서범석
+            </Bold>
             입니다.
           </Sentence>
           <Sentence isLineBreak>
-            팀원들과의 원활한 소통이 좋은 제품을 만들어낸다고 믿습니다.
+            저는 팀원들과의 원활한 소통이 좋은 제품을 만들어낸다고 믿습니다.
           </Sentence>
           <Sentence>
-            긍정적으로 소통하며 만들어낸 결과로 세상을 바꾸는 데 기여하고
-            싶습니다.
+            적극적인 소통을 통해 만들어낸 결과물로 긍정적인 변화를 이끌어내고자
+            합니다.
           </Sentence>
         </Description>
 
