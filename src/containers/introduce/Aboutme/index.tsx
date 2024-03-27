@@ -18,8 +18,9 @@ const AboutmeWrapper = styled('div')({
 
 const AboutmeItem = styled('div')({
   width: 200,
-  marginTop: 24,
+  marginBottom: 24,
   display: 'flex',
+  alignItems: 'center',
   gap: 16,
 });
 
