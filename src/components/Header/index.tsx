@@ -26,7 +26,7 @@ const HeaderWrapper = styled('header')({
   backdropFilter: 'blur(10px)',
   zIndex: 1000,
   borderRadius: '0 0 24px 24px',
-  border: '0.5px solid rgba(0, 0, 0, 0.05)',
+  border: '1px solid rgba(0, 0, 0, 0.05)',
   animation: `${DownFromTop} 1s cubic-bezier(0.4, 0, 0.07, 1) 1`,
 });
 
