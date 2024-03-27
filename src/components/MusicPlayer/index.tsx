@@ -241,7 +241,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
         }}
       >
         <IconButton
-          sx={{ mr: '10vw' }}
+          sx={{ mr: 'min(10vw, 140px)' }}
           aria-label='theme button'
           onClick={toggleTheme}
         >
@@ -277,7 +277,7 @@ const MusicPlayer = ({ duration }: MusicPlayerProps) => {
             <FastForwardRounded fontSize='large' htmlColor={mainIconColor} />
           </IconButton>
         )}
-        <IconButton sx={{ ml: '10vw' }} aria-label='list button'>
+        <IconButton sx={{ ml: 'min(10vw, 140px)' }} aria-label='list button'>
           <FormatListBulletedRoundedIcon />
         </IconButton>
       </Box>
