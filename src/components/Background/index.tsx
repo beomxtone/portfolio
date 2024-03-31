@@ -14,9 +14,14 @@ const BlurBackground = styled(DefaultBackground)({
   backdropFilter: 'blur(80px)',
 });
 
-const BackgroundContent = styled(DefaultBackground)(({ title }) => ({
-  backgroundImage: `url("/images/${title}/title.png")`,
-}));
+interface backgroundContent {
+  backgroundtitle: string;
+}
+const BackgroundContent = styled(DefaultBackground)<backgroundContent>(
+  ({ backgroundtitle }) => ({
+    backgroundImage: `url("/images/${backgroundtitle}/title.png")`,
+  }),
+);
 
 interface BackgroundProps {
   children: React.ReactNode;
@@ -33,7 +38,7 @@ const Background = ({ children }: BackgroundProps) => {
   ];
 
   return (
-    <BackgroundContent title={pageTitles[pageIndex]}>
+    <BackgroundContent backgroundtitle={pageTitles[pageIndex]}>
       <BlurBackground>{children}</BlurBackground>
     </BackgroundContent>
   );

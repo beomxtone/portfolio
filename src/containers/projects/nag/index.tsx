@@ -1,14 +1,13 @@
 'use client';
 
 import { useMediaQuery } from '@mui/material';
-import Link from 'next/link';
+
+import PreviewMe from '@/containers/projects/nag/PreviewMe';
 
 import Widget from '@/components/Widget';
 import DesktopCoverImage from '@/components/DesktopCoverImage';
 import MobileCoverImage from '@/components/MobileCoverImage';
 import Header from '@/components/Header';
-import Sentence from '@/components/Description/Sentence';
-import Bold from '@/components/Bold';
 import Description from '@/components/Description';
 
 const title: string = '명절 잔소리 영수증';
@@ -54,22 +53,9 @@ const NagPage = () => {
           skills='Typescript, Next 13, Vanilla Extract, Recoil'
           link={link}
           github={github}
-        >
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-          <Sentence>&nbsp;</Sentence>
-        </Description>
+        />
+
+        <PreviewMe />
       </Widget>
     </>
   );

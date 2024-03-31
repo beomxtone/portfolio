@@ -7,7 +7,7 @@ import Sentence from '@/components/Description/Sentence';
 import Bold from '@/components/Bold';
 
 interface descriptionProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title?: string;
   summary?: string;
   period?: string;
