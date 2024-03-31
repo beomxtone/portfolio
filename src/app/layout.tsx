@@ -8,8 +8,8 @@ import type { Metadata } from 'next';
 import Provider from '@/app/Provider';
 
 export const metadata: Metadata = {
-  title: "Asher's portfolio",
-  description: 'My name is Beomseok Seo, Welcome to my portfolio',
+  title: '프론트엔드 개발자 서범석 포트폴리오',
+  description: '재생, 다음 곡을 눌러 프로젝트 미리보기',
 };
 
 const Pretendard = localFont({

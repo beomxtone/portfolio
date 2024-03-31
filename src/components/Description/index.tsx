@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { styled, useTheme } from '@mui/material/styles';
 
 import { ContentTitle } from '@/styles/common';
 
@@ -29,6 +30,10 @@ const Description = ({
   link,
   github,
 }: descriptionProps) => {
+  const UrlLink = styled(Link)({
+    color: `${useTheme().palette.mode === 'dark' ? 'white' : 'black'}`,
+  });
+
   return (
     <Content>
       <ContentTitle>{title}</ContentTitle>
@@ -65,13 +70,13 @@ const Description = ({
       {link && (
         <Sentence isLineBreak>
           <Bold>Link</Bold> <br />
-          <Link href={link}>{link}</Link>
+          <UrlLink href={link}>{link}</UrlLink>
         </Sentence>
       )}
       {github && (
         <Sentence isLineBreak>
           <Bold>Github</Bold> <br />
-          <Link href={github}>{github}</Link>
+          <UrlLink href={github}>{github}</UrlLink>
         </Sentence>
       )}
       {children}
