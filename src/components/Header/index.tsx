@@ -97,9 +97,9 @@ const Header = ({ imageSrc, title, subTitle, link, github }: HeaderProps) => {
           {github && (
             <IconWrapper href={github}>
               {theme.palette.mode === 'light' ? (
-                <IconGithub width={36} height={36} />
+                <IconGithub width={32} height={32} />
               ) : (
-                <IconGithubLight width={36} height={36} />
+                <IconGithubLight width={32} height={32} />
               )}
             </IconWrapper>
           )}

@@ -13,6 +13,7 @@ interface descriptionProps {
   period?: string;
   position?: string;
   skills?: string;
+  profit?: string;
   link?: string;
   github?: string;
 }
@@ -24,6 +25,7 @@ const Description = ({
   period,
   position,
   skills,
+  profit,
   link,
   github,
 }: descriptionProps) => {
@@ -52,6 +54,12 @@ const Description = ({
         <Sentence isLineBreak>
           <Bold>기술 스택</Bold> <br />
           {skills}
+        </Sentence>
+      )}
+      {profit && (
+        <Sentence isLineBreak>
+          <Bold>성과</Bold> <br />
+          {profit}
         </Sentence>
       )}
       {link && (
