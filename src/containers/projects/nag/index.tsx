@@ -13,7 +13,7 @@ import Description from '@/components/Description';
 const title: string = '명절 잔소리 영수증';
 const subTitle: string = '가족 세대갈등 해소 플랫폼';
 const imageSrc: string = '/images/nag/title.png';
-const link: string = 'https://jansorry.vercel.app';
+const link: string = 'https://jansorry.com';
 const github: string = 'https://github.com/jansorry/jansorry-fe';
 
 const NagPage = () => {
