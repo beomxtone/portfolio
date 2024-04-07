@@ -2,8 +2,17 @@
 
 import { useRecoilValue } from 'recoil';
 import { styled } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 
 import { pageIndexState } from '@/states/musicPlayer';
+
+const pageTitles: string[] = [
+  'introduce',
+  'nag',
+  'dashboard',
+  'house',
+  'javascript',
+];
 
 const DefaultBackground = styled('section')({
   width: '100%',
@@ -15,11 +24,11 @@ const BlurBackground = styled(DefaultBackground)({
 });
 
 interface backgroundContent {
-  backgroundtitle: string;
+  title: string;
 }
 const BackgroundContent = styled(DefaultBackground)<backgroundContent>(
-  ({ backgroundtitle }) => ({
-    backgroundImage: `url("/images/${backgroundtitle}/title.png")`,
+  ({ title }) => ({
+    backgroundImage: `${title && `url("/images/${title}/title.png")`}`,
   }),
 );
 
@@ -28,17 +37,15 @@ interface BackgroundProps {
 }
 
 const Background = ({ children }: BackgroundProps) => {
+  const [title, setTitle] = useState<string>('');
   const pageIndex = useRecoilValue(pageIndexState);
-  const pageTitles: string[] = [
-    'introduce',
-    'nag',
-    'dashboard',
-    'house',
-    'javascript',
-  ];
+
+  useEffect(() => {
+    setTitle(pageTitles[pageIndex]);
+  }, [pageIndex]);
 
   return (
-    <BackgroundContent backgroundtitle={pageTitles[pageIndex]}>
+    <BackgroundContent title={title}>
       <BlurBackground>{children}</BlurBackground>
     </BackgroundContent>
   );
