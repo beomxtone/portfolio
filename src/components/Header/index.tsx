@@ -65,7 +65,7 @@ const Header = ({ imageSrc, title, subTitle, link, github }: HeaderProps) => {
     <Image
       src={imageSrc}
       alt={imageSrc}
-      sizes='100vw'
+      sizes='100%'
       fill
       style={{ borderRadius: 1 }}
       priority

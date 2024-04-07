@@ -56,7 +56,7 @@ const DesktopCoverImage = ({
     <Image
       src={imageSrc}
       alt={imageSrc}
-      sizes='100vw'
+      sizes='100%'
       fill
       style={{ borderRadius: 24, border: '1px solid rgba(0, 0, 0, 0.05)' }}
       priority
