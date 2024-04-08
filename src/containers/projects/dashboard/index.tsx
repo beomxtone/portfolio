@@ -7,10 +7,8 @@ import { ContentTitle } from '@/styles/common';
 import Widget from '@/components/Widget';
 import DesktopCoverImage from '@/components/DesktopCoverImage';
 import MobileCoverImage from '@/components/MobileCoverImage';
-import Sentence from '@/components/Description/Sentence';
 import Description from '@/components/Description';
 import Header from '@/components/Header';
-import Bold from '@/components/Bold';
 import Content from '@/components/Content';
 import ImageContent from '@/components/ImageContent';
 
