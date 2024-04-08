@@ -2,11 +2,12 @@
 
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { scrollIndexState } from '@/states/musicPlayer';
 import { isScrollState } from '@/states/coverImage';
+import useThrottleScroll from '@/hooks/useThrottleScroll';
 
 import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
@@ -45,37 +46,22 @@ const Widget = ({ children }: WidgetProps) => {
   const isLarge = useMediaQuery('(min-aspect-ratio: 1/1)');
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [scrollIndex, setScrollIndex] = useRecoilState(scrollIndexState);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
+  const setScrollIndex = useSetRecoilState(scrollIndexState);
 
   let maxScroll = 0;
-
-  const handleScroll = useCallback((): void => {
-    if (!contentRef.current) return;
-
-    const { scrollTop } = contentRef.current;
-
-    if (scrollTop === 0) {
-      setScrollIndex(0);
-      return;
-    }
-
-    setScrollIndex(scrollTop);
-  }, []);
-
   if (contentRef.current) {
     const { scrollHeight, clientHeight } = contentRef.current;
     maxScroll = scrollHeight - clientHeight;
   }
 
-  useEffect(() => {
-    if (scrollIndex === 0) setIsScroll(false);
-    else if (scrollIndex !== 0 && !isScroll) setIsScroll(true);
+  const throttleScrollIndex = useThrottleScroll(100, contentRef.current);
 
-    if (contentRef.current) {
-      contentRef.current.scrollTop = scrollIndex;
-    }
-  }, [scrollIndex]);
+  useEffect(() => {
+    setScrollIndex(throttleScrollIndex);
+    if (throttleScrollIndex === 0) setIsScroll(false);
+    else if (throttleScrollIndex !== 0 && !isScroll) setIsScroll(true);
+  }, [throttleScrollIndex]);
 
   const InnerLayout = (
     <>
@@ -84,7 +70,6 @@ const Widget = ({ children }: WidgetProps) => {
           contentRef.current = el;
           setIsMounted(!!el);
         }}
-        onScroll={handleScroll}
       >
         {children}
       </Content>
