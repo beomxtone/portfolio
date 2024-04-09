@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { isScrollState } from '@/states/coverImage';
 import { DownFromTop } from '@/styles/keyframes';
 import { IconGithub, IconGithubLight } from '#/svgs';
+import { headerData } from '@/types/header';
 
 const HeaderAlign = styled('div')({
   display: 'flex',
@@ -48,14 +49,10 @@ const IconWrapper = styled(Link)({
 });
 
 interface HeaderProps {
-  imageSrc: string;
-  title: string;
-  subTitle: string;
-  link?: string;
-  github?: string;
+  props: headerData;
 }
 
-const Header = ({ imageSrc, title, subTitle, link, github }: HeaderProps) => {
+const Header = ({ props }: HeaderProps) => {
   const theme = useTheme();
   const isScroll = useRecoilValue(isScrollState);
   const subTitleColor =
@@ -63,8 +60,8 @@ const Header = ({ imageSrc, title, subTitle, link, github }: HeaderProps) => {
 
   const CoverImage = (
     <Image
-      src={imageSrc}
-      alt={imageSrc}
+      src={props.imageSrc}
+      alt={props.title}
       sizes='100%'
       fill
       style={{ borderRadius: 1 }}
@@ -84,18 +81,22 @@ const Header = ({ imageSrc, title, subTitle, link, github }: HeaderProps) => {
           }}
         >
           <HeaderImage>
-            {link ? <Link href={link}>{CoverImage}</Link> : CoverImage}
+            {props.link ? (
+              <Link href={props.link}>{CoverImage}</Link>
+            ) : (
+              CoverImage
+            )}
           </HeaderImage>
           <HeaderTitle>
             <Typography noWrap fontWeight={600} fontSize='2.5vh'>
-              {title}
+              {props.title}
             </Typography>
             <Typography color={subTitleColor} fontWeight={600} fontSize='1.8vh'>
-              {subTitle}
+              {props.subtitle}
             </Typography>
           </HeaderTitle>
-          {github && (
-            <IconWrapper href={github}>
+          {props.github && (
+            <IconWrapper href={props.github}>
               {theme.palette.mode === 'light' ? (
                 <IconGithub width={32} height={32} />
               ) : (

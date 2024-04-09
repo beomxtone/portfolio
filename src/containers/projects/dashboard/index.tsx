@@ -1,50 +1,37 @@
 'use client';
 
-import { useMediaQuery } from '@mui/material';
-
 import { ContentTitle } from '@/styles/common';
 
 import Widget from '@/components/Widget';
-import DesktopCoverImage from '@/components/DesktopCoverImage';
-import MobileCoverImage from '@/components/MobileCoverImage';
 import Description from '@/components/Description';
 import Header from '@/components/Header';
 import Content from '@/components/Content';
 import ImageContent from '@/components/ImageContent';
 
 const title: string = '어크로스비 대시보드';
-const subTitle: string = '매출 정보 데이터 시각화 프로젝트';
+const subtitle: string = '매출 정보 데이터 시각화 프로젝트';
 const imageSrc: string = '/images/dashboard/title.png';
 const link: string = 'https://www.acrossb.net/';
 
 const DashboardPage = () => {
-  const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
-
   return (
     <>
       <Header
-        title={title}
-        subTitle={subTitle}
-        imageSrc={imageSrc}
-        link={link}
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          link,
+        }}
       />
-      <Widget>
-        {isDesktop ? (
-          <DesktopCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        ) : (
-          <MobileCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        )}
-
+      <Widget
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          link,
+        }}
+      >
         <Description
           title='Description'
           summary='대시보드 데이터 시각화 프로젝트'

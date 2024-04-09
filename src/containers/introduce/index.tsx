@@ -1,13 +1,9 @@
 'use client';
 
-import { useMediaQuery } from '@mui/material';
-
 import Skills from '@/containers/introduce/Skills';
 import Aboutme from '@/containers/introduce/Aboutme';
 
 import Widget from '@/components/Widget';
-import DesktopCoverImage from '@/components/DesktopCoverImage';
-import MobileCoverImage from '@/components/MobileCoverImage';
 import Description from '@/components/Description';
 import Sentence from '@/components/Description/Sentence';
 import Bold from '@/components/Bold';
@@ -15,38 +11,29 @@ import Careers from './Careers';
 import Header from '@/components/Header';
 
 const title: string = 'Beomseok Seo';
-const subTitle: string = 'Frontend Developer';
+const subtitle: string = 'Frontend Developer';
 const imageSrc: string = '/images/introduce/title.png';
 const link: string = 'https://github.com/beomxtone';
 
 const IntroducePage = () => {
-  const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
-
   return (
     <>
       <Header
-        title={title}
-        subTitle={subTitle}
-        imageSrc={imageSrc}
-        github={link}
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          github: link,
+        }}
       />
-      <Widget>
-        {isDesktop ? (
-          <DesktopCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        ) : (
-          <MobileCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        )}
-
+      <Widget
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          link,
+        }}
+      >
         <Description title='👋 Introduce'>
           <Sentence>안녕하세요.</Sentence>
           <Sentence>

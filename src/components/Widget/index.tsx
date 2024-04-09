@@ -8,9 +8,12 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { scrollIndexState } from '@/states/musicPlayer';
 import { isScrollState } from '@/states/coverImage';
 import useThrottleScroll from '@/hooks/useThrottleScroll';
+import { coverImageData } from '@/types/coverImage';
 
 import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
+import DesktopCoverImage from '@/components/DesktopCoverImage';
+import MobileCoverImage from '@/components/MobileCoverImage';
 
 const Layout = styled('div')(({ theme }) => ({
   height: '100svh',
@@ -40,10 +43,13 @@ const Content = styled('div')({
 
 interface WidgetProps {
   children: React.ReactNode;
+  props: coverImageData;
 }
 
-const Widget = ({ children }: WidgetProps) => {
+const Widget = ({ children, props }: WidgetProps) => {
   const isLarge = useMediaQuery('(min-aspect-ratio: 1/1)');
+  const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
+
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
@@ -71,6 +77,11 @@ const Widget = ({ children }: WidgetProps) => {
           setIsMounted(!!el);
         }}
       >
+        {isDesktop ? (
+          <DesktopCoverImage props={props} />
+        ) : (
+          <MobileCoverImage props={props} />
+        )}
         {children}
       </Content>
       <MusicPlayer duration={isMounted ? maxScroll : 0} />

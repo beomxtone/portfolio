@@ -46,8 +46,8 @@ const ControlButton = ({
   handlePlayClick,
   mainIconColor,
 }: ControlButtonProps) => {
-  let iconButtonProps = {};
-  let icon = null;
+  let iconButtonProps;
+  let icon;
 
   if (repeat) {
     iconButtonProps = { 'aria-label': 'repeat', onClick: handleRepeatClick };

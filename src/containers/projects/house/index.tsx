@@ -1,12 +1,8 @@
 'use client';
 
-import { useMediaQuery } from '@mui/material';
-
 import { ContentTitle } from '@/styles/common';
 
 import Widget from '@/components/Widget';
-import DesktopCoverImage from '@/components/DesktopCoverImage';
-import MobileCoverImage from '@/components/MobileCoverImage';
 import Header from '@/components/Header';
 import Description from '@/components/Description';
 import Content from '@/components/Content';
@@ -14,38 +10,29 @@ import Subtitle from '@/components/Subtitle';
 import ImageContent from '@/components/ImageContent';
 
 const title: string = '내집스캔';
-const subTitle: string = '부동산 등기부등본 자동 분석 프로젝트';
+const subtitle: string = '부동산 등기부등본 자동 분석 프로젝트';
 const imageSrc: string = '/images/house/title.png';
 const link: string = 'https://www.naezipscan.com/';
 
 const HousePage = () => {
-  const isDesktop = useMediaQuery('(min-aspect-ratio: 1/1.5)');
-
   return (
     <>
       <Header
-        title={title}
-        subTitle={subTitle}
-        imageSrc={imageSrc}
-        link={link}
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          link,
+        }}
       />
-      <Widget>
-        {isDesktop ? (
-          <DesktopCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        ) : (
-          <MobileCoverImage
-            title={title}
-            subTitle={subTitle}
-            imageSrc={imageSrc}
-            link={link}
-          />
-        )}
-
+      <Widget
+        props={{
+          title,
+          subtitle,
+          imageSrc,
+          link,
+        }}
+      >
         <Description
           title='Description'
           summary='부동산 등기부등본 자동분석 프로젝트'

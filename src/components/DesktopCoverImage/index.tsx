@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 import { isScrollState } from '@/states/coverImage';
 import { ShowOpacity } from '@/styles/keyframes';
+import { coverImageData } from '@/types/coverImage';
 
 const CoverImageWrapper = styled('div')({
   marginTop: '10vh',
@@ -35,27 +36,19 @@ const Blanks = styled('div')({
 });
 
 interface CoverImageProps {
-  imageSrc: string;
-  title: string;
-  subTitle: string;
-  link?: string;
+  props: coverImageData;
 }
 
-const DesktopCoverImage = ({
-  imageSrc,
-  title,
-  subTitle,
-  link,
-}: CoverImageProps) => {
+const DesktopCoverImage = ({ props }: CoverImageProps) => {
   const theme = useTheme();
   const isScroll = useRecoilValue(isScrollState);
-  const subTitleColor =
+  const subtitleColor =
     theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
 
   const CoverImage = (
     <Image
-      src={imageSrc}
-      alt={imageSrc}
+      src={props.imageSrc}
+      alt={props.imageSrc}
       sizes='100%'
       fill
       style={{ borderRadius: 24, border: '1px solid rgba(0, 0, 0, 0.05)' }}
@@ -68,14 +61,14 @@ const DesktopCoverImage = ({
   return (
     <CoverImageWrapper>
       <DesktopImageWrapper>
-        {link ? <Link href={link}>{CoverImage}</Link> : CoverImage}
+        {props.link ? <Link href={props.link}>{CoverImage}</Link> : CoverImage}
       </DesktopImageWrapper>
       <Box sx={{ ml: 1.5, mt: '5vh', width: '50vh', maxWidth: '500px' }}>
         <Typography noWrap fontWeight={600} fontSize='3vh'>
-          {title}
+          {props.title}
         </Typography>
-        <Typography color={subTitleColor} fontWeight={600} fontSize='2vh'>
-          {subTitle}
+        <Typography color={subtitleColor} fontWeight={600} fontSize='2vh'>
+          {props.subtitle}
         </Typography>
       </Box>
     </CoverImageWrapper>
