@@ -3,12 +3,13 @@
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-import { scrollIndexState } from '@/states/musicPlayer';
-import { isScrollState } from '@/states/coverImage';
 import useThrottleScroll from '@/hooks/useThrottleScroll';
+import useThrottle from '@/hooks/useThrottle';
 import { coverImageData } from '@/types/coverImage';
+import { isScrollState } from '@/states/coverImage';
+import { scrollIndexState } from '@/states/scrollIndex';
 
 import Background from '@/components/Background';
 import MusicPlayer from '@/components/MusicPlayer';
@@ -53,7 +54,7 @@ const Widget = ({ children, props }: WidgetProps) => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [isScroll, setIsScroll] = useRecoilState(isScrollState);
-  const setScrollIndex = useSetRecoilState(scrollIndexState);
+  const [scrollIndex, setScrollIndex] = useRecoilState(scrollIndexState);
 
   let maxScroll = 0;
   if (contentRef.current) {
@@ -61,6 +62,7 @@ const Widget = ({ children, props }: WidgetProps) => {
     maxScroll = scrollHeight - clientHeight;
   }
 
+  // 화면 스크롤했을 때 슬라이더 제어
   const throttleScrollIndex = useThrottleScroll(100, contentRef.current);
 
   useEffect(() => {
@@ -68,6 +70,18 @@ const Widget = ({ children, props }: WidgetProps) => {
     if (throttleScrollIndex === 0) setIsScroll(false);
     else if (throttleScrollIndex !== 0 && !isScroll) setIsScroll(true);
   }, [throttleScrollIndex]);
+
+  // 슬라이더를 움직였을 때 화면 스크롤
+  const updateIndex = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = scrollIndex;
+    }
+  };
+  const throttledUpdateIndex = useThrottle(updateIndex, 50);
+
+  useEffect(() => {
+    throttledUpdateIndex();
+  }, [scrollIndex]);
 
   const InnerLayout = (
     <>

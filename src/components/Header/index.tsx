@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { isScrollState } from '@/states/coverImage';
 import { DownFromTop } from '@/styles/keyframes';
@@ -54,9 +55,14 @@ interface HeaderProps {
 
 const Header = ({ props }: HeaderProps) => {
   const theme = useTheme();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const isScroll = useRecoilValue(isScrollState);
   const subTitleColor =
     theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const CoverImage = (
     <Image
@@ -68,6 +74,8 @@ const Header = ({ props }: HeaderProps) => {
       priority
     />
   );
+
+  if (!isMounted) return null;
 
   if (isScroll) {
     return (
@@ -109,7 +117,7 @@ const Header = ({ props }: HeaderProps) => {
     );
   }
 
-  return null;
+  return <></>;
 };
 
 export default Header;

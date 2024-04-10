@@ -5,8 +5,8 @@ const { persistAtom } = recoilPersist({
   key: `persistAtom`,
 });
 
-export const isScrollState = atom<boolean>({
-  key: 'isScroll',
-  default: false,
+export const scrollIndexState = atom<number>({
+  key: 'scrollIndex',
+  default: 0,
   effects_UNSTABLE: [persistAtom],
 });

@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useRecoilValue } from 'recoil';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import { isScrollState } from '@/states/coverImage';
 import { ShowOpacity } from '@/styles/keyframes';
@@ -41,9 +42,14 @@ interface CoverImageProps {
 
 const MobileCoverImage = ({ props }: CoverImageProps) => {
   const theme = useTheme();
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const isScroll = useRecoilValue(isScrollState);
   const subtitleColor =
     theme.palette.mode === 'dark' ? 'text.secondary' : 'rgba(0, 0, 0, 0.36)';
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const CoverImage = (
     <Image
@@ -56,6 +62,7 @@ const MobileCoverImage = ({ props }: CoverImageProps) => {
     />
   );
 
+  if (!isMounted) return null;
   if (isScroll) return <Blanks />;
 
   return (

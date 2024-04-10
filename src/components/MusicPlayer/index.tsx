@@ -17,10 +17,11 @@ import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBullete
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 
-import { scrollIndexState, pageIndexState } from '@/states/musicPlayer';
+import { pageIndexState } from '@/states/pageIndex';
 import { formatDuration } from '@/utils/times';
 import { MAX_PAGE_LENGTH } from '@/constants';
 import { darkThemeState } from '@/states/theme';
+import { scrollIndexState } from '@/states/scrollIndex';
 
 const TinyText = styled(Typography)({
   fontSize: '0.75rem',

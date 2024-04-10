@@ -4,7 +4,7 @@ const useThrottleScroll = (
   delay: number,
   element: HTMLDivElement | null,
 ): number => {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null);
   const requestRef = useRef<number | null>(null);
 

@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { styled } from '@mui/material/styles';
 import { useEffect, useState } from 'react';
 
-import { pageIndexState } from '@/states/musicPlayer';
+import { pageIndexState } from '@/states/pageIndex';
 
 const pageTitles: string[] = [
   'introduce',
