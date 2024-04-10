@@ -2,10 +2,9 @@
 
 import { styled } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import useThrottleScroll from '@/hooks/useThrottleScroll';
 import useThrottle from '@/hooks/useThrottle';
 import { coverImageData } from '@/types/coverImage';
 import { isScrollState } from '@/states/coverImage';
@@ -63,13 +62,27 @@ const Widget = ({ children, props }: WidgetProps) => {
   }
 
   // 화면 스크롤했을 때 슬라이더 제어
-  const throttleScrollIndex = useThrottleScroll(100, contentRef.current);
+  // const throttleScrollIndex = useThrottleScroll(100, contentRef.current);
 
-  useEffect(() => {
-    setScrollIndex(throttleScrollIndex);
-    if (throttleScrollIndex === 0) setIsScroll(false);
-    else if (throttleScrollIndex !== 0 && !isScroll) setIsScroll(true);
-  }, [throttleScrollIndex]);
+  const handleScroll = useCallback((): void => {
+    if (!contentRef.current) return;
+
+    const { scrollTop } = contentRef.current;
+
+    if (scrollTop === 0) {
+      setIsScroll(false);
+      setScrollIndex(0);
+      return;
+    }
+    if (scrollTop !== 0 && !isScroll) setIsScroll(true);
+    setScrollIndex(scrollTop);
+  }, []);
+
+  // useEffect(() => {
+  //   setScrollIndex(throttleScrollIndex);
+  //   if (throttleScrollIndex === 0) setIsScroll(false);
+  //   else if (throttleScrollIndex !== 0 && !isScroll) setIsScroll(true);
+  // }, [throttleScrollIndex]);
 
   // 슬라이더를 움직였을 때 화면 스크롤
   const updateIndex = () => {
@@ -90,6 +103,7 @@ const Widget = ({ children, props }: WidgetProps) => {
           contentRef.current = el;
           setIsMounted(!!el);
         }}
+        onScroll={handleScroll}
       >
         {isDesktop ? (
           <DesktopCoverImage props={props} />
