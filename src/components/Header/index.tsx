@@ -117,7 +117,7 @@ const Header = ({ props }: HeaderProps) => {
     );
   }
 
-  return <></>;
+  return null;
 };
 
 export default Header;
