@@ -17,11 +17,11 @@ const AboutmeWrapper = styled('div')({
 });
 
 const AboutmeItem = styled('div')({
-  width: 200,
+  width: 195,
   marginBottom: 24,
   display: 'flex',
   alignItems: 'center',
-  gap: 16,
+  gap: 12,
 });
 
 const AboutmeContent = styled('div')({
