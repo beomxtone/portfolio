@@ -10,7 +10,7 @@ import ImageContent from '@/components/ImageContent';
 
 const title: string = '어크로스비 대시보드';
 const subtitle: string = '매출 정보 데이터 시각화 프로젝트';
-const imageSrc: string = '/images/dashboard/title.png';
+const imageSrc: string = '/images/dashboard/title.webp';
 const link: string = 'https://www.acrossb.net/';
 
 const DashboardPage = () => {
@@ -45,11 +45,11 @@ const DashboardPage = () => {
         <Content>
           <ContentTitle>What I do</ContentTitle>
           <ImageContent
-            src='/images/dashboard/dashboard-1.png'
+            src='/images/dashboard/dashboard-1.webp'
             alt='dashboard-1'
           />
           <ImageContent
-            src='/images/dashboard/dashboard-2.png'
+            src='/images/dashboard/dashboard-2.webp'
             alt='dashboard-2'
           />
         </Content>

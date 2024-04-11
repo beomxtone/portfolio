@@ -28,7 +28,7 @@ interface backgroundContent {
 }
 const BackgroundContent = styled(DefaultBackground)<backgroundContent>(
   ({ title }) => ({
-    backgroundImage: `${title && `url("/images/${title}/title.png")`}`,
+    backgroundImage: `${title && `url("/images/${title}/title.webp")`}`,
   }),
 );
 

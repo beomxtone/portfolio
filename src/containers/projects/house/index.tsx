@@ -11,7 +11,7 @@ import ImageContent from '@/components/ImageContent';
 
 const title: string = '내집스캔';
 const subtitle: string = '부동산 등기부등본 자동 분석 프로젝트';
-const imageSrc: string = '/images/house/title.png';
+const imageSrc: string = '/images/house/title.webp';
 const link: string = 'https://www.naezipscan.com/';
 
 const HousePage = () => {
@@ -45,24 +45,28 @@ const HousePage = () => {
         <Content>
           <ContentTitle>What I do</ContentTitle>
           <Subtitle>집 유형 선택 페이지</Subtitle>
-          <ImageContent src='/images/house/check.png' alt='check' size={60} />
+          <ImageContent src='/images/house/check.webp' alt='check' size={60} />
           <Subtitle>검색 안내 페이지</Subtitle>
-          <ImageContent src='/images/house/search.png' alt='search' size={60} />
+          <ImageContent
+            src='/images/house/search.webp'
+            alt='search'
+            size={60}
+          />
           <Subtitle>한국 주소지 검색 기능</Subtitle>
           <ImageContent
-            src='/images/house/search-detail.png'
+            src='/images/house/search-detail.webp'
             alt='search-detail'
             size={60}
           />
           <Subtitle>양호, 주의, 위험에 따른 레포트</Subtitle>
           <ImageContent
-            src='/images/house/report-safe.png'
+            src='/images/house/report-safe.webp'
             alt='report-safe'
             size={60}
           />
           <Subtitle>레포트 상세 페이지</Subtitle>
           <ImageContent
-            src='/images/house/report-danger.png'
+            src='/images/house/report-danger.webp'
             alt='report-danger'
             size={60}
           />

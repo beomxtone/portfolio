@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 
 const title: string = 'Beomseok Seo';
 const subtitle: string = 'Frontend Developer';
-const imageSrc: string = '/images/introduce/title.png';
+const imageSrc: string = '/images/introduce/title.webp';
 const link: string = 'https://github.com/beomxtone';
 
 const IntroducePage = () => {

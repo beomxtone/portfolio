@@ -89,7 +89,7 @@ const CompanyInfo = ({
       <CompanyWrapper>
         <CompanyImage>
           <Image
-            src={`/images/introduce/${imageInfo}.png`}
+            src={`/images/introduce/${imageInfo}.webp`}
             alt={imageInfo}
             fill
             sizes='48px'

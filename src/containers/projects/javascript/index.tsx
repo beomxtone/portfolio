@@ -11,7 +11,7 @@ import ImageContent from '@/components/ImageContent';
 
 const title: string = '자바스크립트 북스터디';
 const subtitle: string = '모던 자바스크립트 Deep Dive - 이웅모';
-const imageSrc: string = '/images/javascript/title.png';
+const imageSrc: string = '/images/javascript/title.webp';
 const github: string = 'https://github.com/deep-dive-to-js/study-js-deep-dive';
 
 const JavascriptPage = () => {
@@ -45,11 +45,11 @@ const JavascriptPage = () => {
         <Content>
           <ContentTitle>What I do</ContentTitle>
           <Subtitle>규칙 및 Readme 작성</Subtitle>
-          <ImageContent src='/images/javascript/readme.png' alt='readme' />
+          <ImageContent src='/images/javascript/readme.webp' alt='readme' />
           <Subtitle>Issue 및 PR 템플릿 작성</Subtitle>
-          <ImageContent src='/images/javascript/template.png' alt='template' />
+          <ImageContent src='/images/javascript/template.webp' alt='template' />
           <Subtitle>각 주차별 퀴즈 진행</Subtitle>
-          <ImageContent src='/images/javascript/quiz.png' alt='template' />
+          <ImageContent src='/images/javascript/quiz.webp' alt='template' />
         </Content>
       </Widget>
     </>
