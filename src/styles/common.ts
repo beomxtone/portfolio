@@ -15,3 +15,9 @@ export const ContentTitle = styled(Typography)({
   fontWeight: 600,
   fontSize: 20,
 });
+
+export const PreviewWrapper = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});

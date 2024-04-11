@@ -1,6 +1,6 @@
 'use client';
 
-import PreviewMe from '@/containers/projects/nag/PreviewMe';
+import Preview from '@/containers/projects/nag/Preview';
 
 import Widget from '@/components/Widget';
 import Header from '@/components/Header';
@@ -42,7 +42,7 @@ const NagPage = () => {
           github={github}
         />
 
-        <PreviewMe />
+        <Preview />
       </Widget>
     </>
   );
