@@ -124,7 +124,8 @@ const Index = () => {
           period='2024.05 ~ 현재'
           imageInfo='gabia'
           companyName='가비아'
-          summary='그룹웨어 솔루션 프론트엔드 개발'
+          summary='하이웍스 그룹웨어 플랫폼'
+          position='프론트엔드 개발자'
         />
 
         <CompanyInfo
