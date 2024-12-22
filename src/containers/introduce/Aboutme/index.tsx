@@ -4,7 +4,7 @@ import CakeRoundedIcon from '@mui/icons-material/CakeRounded';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import CreateRoundedIcon from '@mui/icons-material/CreateRounded';
+import BusinessIcon from '@mui/icons-material/Business';
 import Typography from '@mui/material/Typography';
 
 import { ContentTitle } from '@/styles/common';
@@ -36,15 +36,15 @@ const Aboutme = () => {
     '주소',
     '연락처',
     '이메일',
-    '학력',
+    '직장',
   ];
   const itemContents: string[] = [
     '서범석',
     '98.05.19',
-    '경기도 고양시',
+    '경기도 안양시',
     '010-6811-3696',
     'beomxtone@gmail.com',
-    '국민대학교 소프트웨어학과',
+    '(주)가비아',
   ];
   const iconList: React.ReactNode[] = [
     <PersonRoundedIcon key='person' />,
@@ -52,7 +52,7 @@ const Aboutme = () => {
     <LocationOnRoundedIcon key='location' />,
     <LocalPhoneRoundedIcon key='phone' />,
     <EmailRoundedIcon key='email' />,
-    <CreateRoundedIcon key='pencil' />,
+    <BusinessIcon key='company' />,
   ];
 
   return (
