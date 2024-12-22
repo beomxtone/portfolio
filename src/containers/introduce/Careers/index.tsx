@@ -121,7 +121,15 @@ const Index = () => {
       <ContentTitle>Careers</ContentTitle>
       <CompanyList>
         <CompanyInfo
-          period='2023.07 ~ 현재'
+          period='2024.05 ~ 현재'
+          imageInfo='gabia'
+          companyName='가비아'
+          summary='하이웍스 그룹웨어 플랫폼'
+          position='프론트엔드 개발자'
+        />
+
+        <CompanyInfo
+          period='2023.07 ~ 2024.05'
           imageInfo='ssafy'
           companyName='삼성 청년 SW 아카데미'
           summary='Java 기반 웹/알고리즘 교육과정'

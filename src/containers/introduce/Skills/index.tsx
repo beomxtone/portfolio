@@ -9,10 +9,14 @@ import {
   IconReact,
   IconRecoil,
   IconStyledComponents,
+  IconReactQuery,
   IconTypescript,
   IconVanillaExtract,
   IconVue,
   IconVuex,
+  IconZustand,
+  IconPlaywright,
+  IconJest,
 } from '#/svgs';
 import { ContentTitle } from '@/styles/common';
 
@@ -71,10 +75,14 @@ const Skills = () => {
     'React',
     'Next.js',
     'Vue.js',
+    'Zustand',
     'Recoil',
     'Vuex',
     'Styled Components',
     'Vanilla Extract',
+    'Tanstack Query',
+    'Jest',
+    'Playwright',
   ];
   const iconList: React.ReactNode[] = [
     <IconJavascript width={48} height={48} key='js' />,
@@ -83,10 +91,14 @@ const Skills = () => {
     <IconReact width={48} height={48} key='react' />,
     <IconNextJs width={48} height={48} key='next' />,
     <IconVue width={48} height={48} key='vue' />,
+    <IconZustand width={48} height={48} key='zustand' />,
     <IconRecoil width={48} height={48} key='recoil' />,
     <IconVuex width={48} height={48} key='vuex' />,
     <IconStyledComponents width={48} height={48} key='styled' />,
     <IconVanillaExtract width={48} height={48} key='ve' />,
+    <IconReactQuery width={48} height={48} key='query' />,
+    <IconJest width={48} height={48} key='jest' />,
+    <IconPlaywright width={48} height={48} key='playwright' />,
   ];
 
   return (
