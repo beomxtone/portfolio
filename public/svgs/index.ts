@@ -10,6 +10,10 @@ import IconRecoil from './recoil.svg';
 import IconVuex from './vuex.svg';
 import IconStyledComponents from './styled-components.svg';
 import IconVanillaExtract from './vanilla-extract.svg';
+import IconReactQuery from './react-query.svg';
+import IconZustand from './zustand.svg';
+import IconJest from './jest.svg';
+import IconPlaywright from './playwright.svg';
 
 export {
   IconGithub,
@@ -24,4 +28,8 @@ export {
   IconVuex,
   IconStyledComponents,
   IconVanillaExtract,
+  IconReactQuery,
+  IconZustand,
+  IconJest,
+  IconPlaywright,
 };
