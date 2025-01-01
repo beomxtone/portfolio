@@ -27,6 +27,33 @@ const CompanyImage = styled('div')({
   overflow: 'hidden',
 });
 
+const gabiaProjects = (
+  <>
+    <Project
+      title='하이웍스 일정관리'
+      summary='레거시 일정관리 솔루션 개편'
+      period='2024.11 ~ 진행 중'
+      skills={[
+        'Typescript',
+        'Next.js',
+        'Zustand',
+        'FullCalendar',
+        'PlayWright',
+      ]}
+    />
+    <Project
+      title='하이웍스 쪽지'
+      period='2024.07 ~ 2024.10'
+      skills={['Typescript', 'Next.js', 'Zustand']}
+    />
+    <Project
+      title='하이웍스 디자인 시스템'
+      period='2024-06 ~ 진행 중'
+      skills={['Mantine', 'Typescript', 'React']}
+    />
+  </>
+);
+
 const SsafyProjects = (
   <>
     <Project
@@ -126,6 +153,7 @@ const Index = () => {
           companyName='가비아'
           summary='하이웍스 그룹웨어 플랫폼'
           position='프론트엔드 개발자'
+          projects={gabiaProjects}
         />
 
         <CompanyInfo
