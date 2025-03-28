@@ -30,9 +30,21 @@ const CompanyImage = styled('div')({
 const gabiaProjects = (
   <>
     <Project
+      title='하이웍스 인사관리 개편'
+      summary='Vue → React 이관 작업'
+      period='2025.04 ~ 진행 중'
+      skills={['Next.js']}
+    />
+    <Project
+      title='하이웍스 게시판 개편'
+      summary='멀티 오피스 환경 대응 및 기존 코드 리팩토링'
+      period='2025.03 ~ 2025.04'
+      skills={['Next.js', 'Recoil']}
+    />
+    <Project
       title='하이웍스 일정관리'
       summary='레거시 일정관리 솔루션 개편'
-      period='2024.11 ~ 진행 중'
+      period='2024.11 ~ 2025.03'
       skills={[
         'Typescript',
         'Next.js',
